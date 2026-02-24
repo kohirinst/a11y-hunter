@@ -1,88 +1,75 @@
 import requests
-from bs4 import BeautifulSoup
 import json
 import datetime
-import time
 
-class A11yHunterPro:
+class SuperA11yHunter:
     def __init__(self):
-        # User-Agent más completo para evitar bloqueos
         self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
-            'Accept-Language': 'es-ES,es;q=0.9'
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
         }
-        self.all_jobs = []
+        self.jobs = []
+        self.keywords = ["Accessibility", "A11y", "WCAG"]
 
-    def fetch_a11yjobs(self):
-        """Extracción de A11yJobs.com (Nicho especializado)"""
-        try:
-            print("Buscando en A11yJobs...")
-            res = requests.get("https://a11yjobs.com", headers=self.headers, timeout=10)
-            soup = BeautifulSoup(res.text, 'html.parser')
-            # Selector actualizado para su estructura actual
-            listings = soup.find_all('div', class_='job-listing') or soup.find_all('article')
-            for job in listings[:15]:
-                title_el = job.find('h2') or job.find('h3')
-                link_el = job.find('a')
-                if title_el and link_el:
-                    self.all_jobs.append({
-                        "title": title_el.get_text(strip=True),
-                        "company": "Especialista A11y",
-                        "url": "https://a11yjobs.com" + link_el['href'] if not link_el['href'].startswith('http') else link_el['href'],
-                        "source": "A11yJobs",
-                        "date": "Reciente"
-                    })
-        except Exception as e: print(f"Error A11yJobs: {e}")
+    def log(self, portal):
+        print(f"📡 Rastreando: {portal}...")
 
-    def fetch_linkedin(self):
-        """LinkedIn Jobs (Global)"""
+    def fetch_remotive(self):
+        self.log("Remotive (USD/Global)")
         try:
-            print("Buscando en LinkedIn...")
-            # Búsqueda amplia para asegurar resultados
-            url = "https://www.linkedin.com/jobs/search?keywords=Accessibility%20Specialist&location=Remote&f_TPR=r604800"
-            res = requests.get(url, headers=self.headers, timeout=10)
-            soup = BeautifulSoup(res.text, 'html.parser')
-            for job in soup.select('.base-card')[:15]:
-                title = job.select_one('.base-search-card__title')
-                company = job.select_one('.base-search-card__subtitle')
-                link = job.select_one('a')
-                if title and link:
-                    self.all_jobs.append({
-                        "title": title.get_text(strip=True),
-                        "company": company.get_text(strip=True) if company else "Empresa",
-                        "url": link['href'].split('?')[0],
-                        "source": "LinkedIn",
-                        "date": "Esta semana"
-                    })
-        except Exception as e: print(f"Error LinkedIn: {e}")
+            res = requests.get("https://remotive.com/api/remote-jobs?search=accessibility", timeout=10).json()
+            for j in res.get('jobs', []):
+                self.jobs.append({"title": j['title'], "company": j['company_name'], "url": j['url'], "source": "Remotive", "type": "Remote/USD"})
+        except: pass
 
-    def fetch_indeed_alt(self):
-        """Indeed (Versión simplificada para evitar CAPTCHA)"""
+    def fetch_weworkremotely(self):
+        self.log("WeWorkRemotely (Contractor)")
         try:
-            print("Buscando en Indeed...")
-            url = "https://www.indeed.com/jobs?q=accessibility+engineer&fromage=7"
-            res = requests.get(url, headers=self.headers, timeout=10)
-            soup = BeautifulSoup(res.text, 'html.parser')
-            for job in soup.select('.resultContent')[:10]:
-                title = job.find('span', id=lambda x: x and x.startswith('jobTitle'))
-                if title:
-                    self.all_jobs.append({
-                        "title": title.get_text(strip=True),
-                        "company": "Publicado en Indeed",
-                        "url": "https://www.indeed.com",
-                        "source": "Indeed",
-                        "date": "Ver en portal"
-                    })
-        except Exception as e: print(f"Error Indeed: {e}")
+            # WWR es excelente para Latam -> USA
+            res = requests.get("https://weworkremotely.com/remote-jobs.rss", timeout=10)
+            # Simplificado: buscando keywords en el feed
+            if "Accessibility" in res.text:
+                self.jobs.append({"title": "Check WWR for A11y", "company": "Various", "url": "https://weworkremotely.com/remote-jobs/search?term=accessibility", "source": "WWR", "type": "Contractor"})
+        except: pass
+
+    def fetch_torre(self):
+        self.log("Torre.ai (Enfoque Latam)")
+        try:
+            # Torre tiene una estructura de API compleja, apuntamos al buscador directo
+            self.jobs.append({"title": "Accessibility Roles en Latam", "company": "Torre.ai", "url": "https://torre.ai/search/jobs?q=accessibility", "source": "Torre", "type": "USD/Latam"})
+        except: pass
+
+    def fetch_adrz(self):
+        # Agregamos acceso rápido a portales que bloquean bots pero son vitales
+        portals = [
+            ("A11yJobs", "https://a11yjobs.com"),
+            ("LinkedIn (Remote)", "https://www.linkedin.com/jobs/search/?keywords=accessibility&f_WRA=true"),
+            ("Indeed (USA/Latam)", "https://www.indeed.com/jobs?q=accessibility+remote"),
+            ("Working Nomads", "https://www.workingnomads.com/jobs?query=accessibility"),
+            ("FlexJobs", "https://www.flexjobs.com/search?search=accessibility"),
+            ("RemoteOK", "https://remoteok.com/remote-accessibility-jobs"),
+            ("Otta", "https://otta.com"),
+            ("Toptal", "https://www.toptal.com/platform/talent/jobs"),
+            ("Braintrust", "https://app.usebraintrust.com/jobs/"),
+            ("Wellfound (AngelList)", "https://wellfound.com/role/l/accessibility-specialist/remote"),
+            ("HackerNews WhoIsHiring", "https://hnhiring.com/search?q=accessibility"),
+            ("Dice", "https://www.dice.com/jobs?q=accessibility&location=Remote"),
+            ("SimplyHired", "https://www.simplyhired.com/search?q=accessibility&fdb=7"),
+            ("Behance (Design A11y)", "https://www.behance.net/joblist?search=accessibility"),
+            ("Authentic Jobs", "https://authenticjobs.com/?s=accessibility"),
+            ("Dribbble Jobs", "https://dribbble.com/jobs?keywords=accessibility"),
+            ("Relocate.me", "https://relocate.me/search?q=accessibility")
+        ]
+        for name, url in portals:
+            self.jobs.append({"title": f"Revisar vacantes en {name}", "company": "Multi-Portal", "url": url, "source": name, "type": "Contractor/USD"})
 
     def save(self):
-        # Eliminar duplicados por URL
-        unique_jobs = {j['url']: j for j in self.all_jobs}.values()
         with open('jobs_data.json', 'w', encoding='utf-8') as f:
-            json.dump(list(unique_jobs), f, indent=4, ensure_ascii=False)
+            json.dump(self.jobs, f, indent=4, ensure_ascii=False)
+        print(f"✅ Proceso terminado. {len(self.jobs)} fuentes listas.")
 
-hunter = A11yHunterPro()
-hunter.fetch_a11yjobs()
-hunter.fetch_linkedin()
-hunter.fetch_indeed_alt()
-hunter.save()
+bot = SuperA11yHunter()
+bot.fetch_remotive()
+bot.fetch_weworkremotely()
+bot.fetch_torre()
+bot.fetch_adrz()
+bot.save()
