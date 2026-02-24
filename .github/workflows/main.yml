@@ -1,0 +1,26 @@
+name: Buscador Diario A11y
+on:
+  schedule:
+    - cron: '0 9 * * *' # Busca empleos cada mañana
+  workflow_dispatch: # Permite buscar manualmente ahora mismo
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Configurar Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Instalar librerias
+        run: pip install requests beautifulsoup4
+      - name: Ejecutar Buscador
+        run: python hunter.py
+      - name: Guardar Resultados
+        run: |
+          git config --global user.name 'A11y Bot'
+          git config --global user.email 'bot@a11y.com'
+          git add jobs_data.json
+          git commit -m "Nuevas vacantes encontradas" || exit 0
+          git push
