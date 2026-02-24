@@ -1,135 +1,72 @@
 [
     {
-        "title": "Check WWR for A11y",
-        "company": "Various",
-        "url": "https://weworkremotely.com/remote-jobs/search?term=accessibility",
-        "source": "WWR",
-        "type": "Contractor"
+        "title": "Accessibility & Digital Compliance Specialist",
+        "company": "Tennessee Board of Regents (TBR)",
+        "url": "https://www.linkedin.com/jobs/view/accessibility-digital-compliance-specialist-at-tennessee-board-of-regents-tbr-4375418834",
+        "source": "LinkedIn",
+        "type": "Global"
     },
     {
-        "title": "Accessibility Roles en Latam",
-        "company": "Torre.ai",
-        "url": "https://torre.ai/search/jobs?q=accessibility",
-        "source": "Torre",
-        "type": "USD/Latam"
+        "title": "Web Accessibility Specialist",
+        "company": "accessiBe",
+        "url": "https://www.linkedin.com/jobs/view/web-accessibility-specialist-at-accessibe-4373607192",
+        "source": "LinkedIn",
+        "type": "Global"
     },
     {
-        "title": "Revisar vacantes en A11yJobs",
-        "company": "Multi-Portal",
-        "url": "https://a11yjobs.com",
-        "source": "A11yJobs",
-        "type": "Contractor/USD"
+        "title": "Accessibility Engineer",
+        "company": "Quantrics Enterprises Inc.",
+        "url": "https://ph.linkedin.com/jobs/view/accessibility-engineer-at-quantrics-enterprises-inc-4374592647",
+        "source": "LinkedIn",
+        "type": "Global"
     },
     {
-        "title": "Revisar vacantes en LinkedIn (Remote)",
-        "company": "Multi-Portal",
-        "url": "https://www.linkedin.com/jobs/search/?keywords=accessibility&f_WRA=true",
-        "source": "LinkedIn (Remote)",
-        "type": "Contractor/USD"
+        "title": "Accessibility Specialist",
+        "company": "Engineering International Belgium",
+        "url": "https://lu.linkedin.com/jobs/view/accessibility-specialist-at-engineering-international-belgium-4373477601",
+        "source": "LinkedIn",
+        "type": "Global"
     },
     {
-        "title": "Revisar vacantes en Indeed (USA/Latam)",
-        "company": "Multi-Portal",
-        "url": "https://www.indeed.com/jobs?q=accessibility+remote",
-        "source": "Indeed (USA/Latam)",
-        "type": "Contractor/USD"
+        "title": "Assessment Accessibility Specialist",
+        "company": "Curriculum Associates",
+        "url": "https://in.linkedin.com/jobs/view/assessment-accessibility-specialist-at-curriculum-associates-4372424020",
+        "source": "LinkedIn",
+        "type": "Global"
     },
     {
-        "title": "Revisar vacantes en Working Nomads",
-        "company": "Multi-Portal",
-        "url": "https://www.workingnomads.com/jobs?query=accessibility",
-        "source": "Working Nomads",
-        "type": "Contractor/USD"
+        "title": "Campus Director of Disability and Accessibility Services",
+        "company": "Connecticut State Community College",
+        "url": "https://www.linkedin.com/jobs/view/campus-director-of-disability-and-accessibility-services-at-connecticut-state-community-college-4375658140",
+        "source": "LinkedIn",
+        "type": "Global"
     },
     {
-        "title": "Revisar vacantes en FlexJobs",
-        "company": "Multi-Portal",
-        "url": "https://www.flexjobs.com/search?search=accessibility",
-        "source": "FlexJobs",
-        "type": "Contractor/USD"
+        "title": "Web Accessibility Intern",
+        "company": "State of Iowa - Executive Branch",
+        "url": "https://www.linkedin.com/jobs/view/web-accessibility-intern-at-state-of-iowa-executive-branch-4373496133",
+        "source": "LinkedIn",
+        "type": "Global"
     },
     {
-        "title": "Revisar vacantes en RemoteOK",
-        "company": "Multi-Portal",
-        "url": "https://remoteok.com/remote-accessibility-jobs",
-        "source": "RemoteOK",
-        "type": "Contractor/USD"
+        "title": "Disability Access Offier (DAO)",
+        "company": "Sunderland AFC",
+        "url": "https://uk.linkedin.com/jobs/view/disability-access-offier-dao-at-sunderland-afc-4374294135",
+        "source": "LinkedIn",
+        "type": "Global"
     },
     {
-        "title": "Revisar vacantes en Otta",
-        "company": "Multi-Portal",
-        "url": "https://otta.com",
-        "source": "Otta",
-        "type": "Contractor/USD"
+        "title": "Accessibility Testing (BHUBANESWAR WALKIN)",
+        "company": "NuStar Technologies",
+        "url": "https://in.linkedin.com/jobs/view/accessibility-testing-bhubaneswar-walkin-at-nustar-technologies-4374753739",
+        "source": "LinkedIn",
+        "type": "Global"
     },
     {
-        "title": "Revisar vacantes en Toptal",
-        "company": "Multi-Portal",
-        "url": "https://www.toptal.com/platform/talent/jobs",
-        "source": "Toptal",
-        "type": "Contractor/USD"
-    },
-    {
-        "title": "Revisar vacantes en Braintrust",
-        "company": "Multi-Portal",
-        "url": "https://app.usebraintrust.com/jobs/",
-        "source": "Braintrust",
-        "type": "Contractor/USD"
-    },
-    {
-        "title": "Revisar vacantes en Wellfound (AngelList)",
-        "company": "Multi-Portal",
-        "url": "https://wellfound.com/role/l/accessibility-specialist/remote",
-        "source": "Wellfound (AngelList)",
-        "type": "Contractor/USD"
-    },
-    {
-        "title": "Revisar vacantes en HackerNews WhoIsHiring",
-        "company": "Multi-Portal",
-        "url": "https://hnhiring.com/search?q=accessibility",
-        "source": "HackerNews WhoIsHiring",
-        "type": "Contractor/USD"
-    },
-    {
-        "title": "Revisar vacantes en Dice",
-        "company": "Multi-Portal",
-        "url": "https://www.dice.com/jobs?q=accessibility&location=Remote",
-        "source": "Dice",
-        "type": "Contractor/USD"
-    },
-    {
-        "title": "Revisar vacantes en SimplyHired",
-        "company": "Multi-Portal",
-        "url": "https://www.simplyhired.com/search?q=accessibility&fdb=7",
-        "source": "SimplyHired",
-        "type": "Contractor/USD"
-    },
-    {
-        "title": "Revisar vacantes en Behance (Design A11y)",
-        "company": "Multi-Portal",
-        "url": "https://www.behance.net/joblist?search=accessibility",
-        "source": "Behance (Design A11y)",
-        "type": "Contractor/USD"
-    },
-    {
-        "title": "Revisar vacantes en Authentic Jobs",
-        "company": "Multi-Portal",
-        "url": "https://authenticjobs.com/?s=accessibility",
-        "source": "Authentic Jobs",
-        "type": "Contractor/USD"
-    },
-    {
-        "title": "Revisar vacantes en Dribbble Jobs",
-        "company": "Multi-Portal",
-        "url": "https://dribbble.com/jobs?keywords=accessibility",
-        "source": "Dribbble Jobs",
-        "type": "Contractor/USD"
-    },
-    {
-        "title": "Revisar vacantes en Relocate.me",
-        "company": "Multi-Portal",
-        "url": "https://relocate.me/search?q=accessibility",
-        "source": "Relocate.me",
-        "type": "Contractor/USD"
+        "title": "Accessibility Officer",
+        "company": "Executive Edge Recruitment",
+        "url": "https://ie.linkedin.com/jobs/view/accessibility-officer-at-executive-edge-recruitment-4375136818",
+        "source": "LinkedIn",
+        "type": "Global"
     }
 ]
