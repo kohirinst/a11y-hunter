@@ -2,103 +2,75 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import random
-import time
 
-class GhostHunter:
+class StableHunter:
     def __init__(self):
-        # Lista de identidades para engañar a los servidores
-        self.user_agents = [
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
-            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36',
-            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36'
-        ]
         self.jobs = []
+        # Rotamos identidades para mayor seguridad
+        self.ua_list = [
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
+            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+        ]
 
     def get_headers(self):
-        return {
-            'User-Agent': random.choice(self.user_agents),
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
-            'Accept-Language': 'en-US,en;q=0.5',
-            'DNT': '1',
-            'Connection': 'keep-alive',
-            'Upgrade-Insecure-Requests': '1'
-        }
+        return {'User-Agent': random.choice(self.ua_list)}
 
-    def log(self, portal):
-        print(f"🕵️ Lanzando ataque de extracción en: {portal}...")
-
-    def fetch_working_nomads(self):
-        self.log("Working Nomads")
+    def fetch_linkedin(self):
+        """LinkedIn: El gigante. Filtramos por remoto y última semana."""
         try:
-            url = "https://www.workingnomads.com/jobs?query=accessibility"
-            res = requests.get(url, headers=self.get_headers(), timeout=15)
+            url = "https://www.linkedin.com/jobs/search?keywords=Accessibility&location=Remote&f_TPR=r604800"
+            res = requests.get(url, headers=self.get_headers(), timeout=10)
             soup = BeautifulSoup(res.text, 'html.parser')
-            # Intentamos romper la estructura de su lista
-            for job in soup.select('.job-card')[:10]:
-                title = job.select_one('h2').text.strip() if job.select_one('h2') else job.select_one('a').text.strip()
-                company = job.select_one('.company-name').text.strip() if job.select_one('.company-name') else "Remote Co."
-                link = "https://www.workingnomads.com" + job.select_one('a')['href']
-                self.jobs.append({"title": title, "company": company, "url": link, "source": "WorkingNomads", "type": "USD / Remote"})
-        except: pass
+            for job in soup.select('.base-card')[:12]:
+                title = job.select_one('.base-search-card__title').get_text(strip=True)
+                company = job.select_one('.base-search-card__subtitle').get_text(strip=True)
+                link = job.select_one('a')['href'].split('?')[0]
+                self.jobs.append({"title": title, "company": company, "url": link, "source": "LinkedIn", "type": "Remote/Global"})
+        except: print("Error en LinkedIn")
 
-    def fetch_weworkremotely(self):
-        self.log("WeWorkRemotely")
+    def fetch_remotive(self):
+        """Remotive: La mejor API para pagos en USD y contratos Contractor."""
         try:
-            res = requests.get("https://weworkremotely.com/remote-jobs/search?term=accessibility", headers=self.get_headers())
-            soup = BeautifulSoup(res.text, 'html.parser')
-            for item in soup.select('li.feature') + soup.select('li[class*="job"]'):
-                title_el = item.select_one('.title')
-                if title_el:
-                    self.jobs.append({
-                        "title": title_el.text.strip(),
-                        "company": item.select_one('.company').text.strip(),
-                        "url": "https://weworkremotely.com" + item.select_one('a')['href'],
-                        "source": "WWR",
-                        "type": "Contractor"
-                    })
-        except: pass
-
-    def fetch_torre(self):
-        self.log("Torre.ai (API Bruteforce)")
-        try:
-            # Intentamos peticion directa a su endpoint de busqueda
-            payload = {"query": "accessibility", "identityType": "person", "limit": 10}
-            res = requests.post("https://search.torre.ai/opportunities/_search", json=payload, timeout=10)
-            data = res.json()
-            for r in data.get('results', []):
+            res = requests.get("https://remotive.com/api/remote-jobs?search=accessibility", timeout=10).json()
+            for j in res.get('jobs', [])[:12]:
                 self.jobs.append({
-                    "title": r.get('objective', 'A11y Role'),
-                    "company": r.get('organizations', [{}])[0].get('name', 'Latam Startup'),
-                    "url": f"https://torre.ai/jobs/{r.get('id')}",
-                    "source": "Torre",
-                    "type": "Latam / USD"
+                    "title": j['title'],
+                    "company": j['company_name'],
+                    "url": j['url'],
+                    "source": "Remotive",
+                    "type": "USD / Remote"
                 })
-        except: pass
+        except: print("Error en Remotive")
 
-    def fetch_simplyhired(self):
-        self.log("SimplyHired (Proxy Simulation)")
+    def fetch_a11yjobs(self):
+        """A11yJobs: El portal número 1 de accesibilidad en el mundo."""
         try:
-            url = "https://www.simplyhired.com/search?q=accessibility&fdb=7"
-            res = requests.get(url, headers=self.get_headers(), timeout=15)
+            res = requests.get("https://a11yjobs.com", headers=self.get_headers(), timeout=10)
             soup = BeautifulSoup(res.text, 'html.parser')
-            for card in soup.select('div[class*="SerpJob-jobCard"]')[:10]:
-                title = card.select_one('h3').text.strip()
-                company = card.select_one('span[data-testid="companyName"]').text.strip()
-                self.jobs.append({"title": title, "company": company, "url": "https://www.simplyhired.com", "source": "SimplyHired", "type": "Aggregator"})
-        except: pass
+            # Buscamos los contenedores de empleos reales
+            for card in soup.find_all(['div', 'article'], class_=lambda x: x and ('job' in x.lower()))[:10]:
+                link_el = card.find('a')
+                if link_el:
+                    title = card.find(['h2', 'h3']).get_text(strip=True) if card.find(['h2', 'h3']) else "Specialist"
+                    self.jobs.append({
+                        "title": title,
+                        "company": "Accessibility Expert",
+                        "url": "https://a11yjobs.com" + link_el['href'] if not link_el['href'].startswith('http') else link_el['href'],
+                        "source": "A11yJobs",
+                        "type": "Niche/USD"
+                    })
+        except: print("Error en A11yJobs")
 
     def save(self):
-        # Limpieza de duplicados por titulo para que no veas lo mismo
-        unique = {j['title']+j['company']: j for j in self.jobs}.values()
+        # Eliminamos duplicados por URL para no repetir
+        clean_list = {j['url']: j for j in self.jobs}.values()
         with open('jobs_data.json', 'w', encoding='utf-8') as f:
-            json.dump(list(unique), f, indent=4, ensure_ascii=False)
-        print(f"📊 Extracción completa: {len(unique)} vacantes reales listas.")
+            json.dump(list(clean_list), f, indent=4, ensure_ascii=False)
+        print(f"✅ Éxito: {len(clean_list)} vacantes reales encontradas.")
 
-hunter = GhostHunter()
-# Ejecutamos las extracciones
-hunter.fetch_working_nomads()
-hunter.fetch_weworkremotely()
-hunter.fetch_torre()
-hunter.fetch_simplyhired()
-# Guardamos
-hunter.save()
+# Iniciar
+bot = StableHunter()
+bot.fetch_linkedin()
+bot.fetch_remotive()
+bot.fetch_a11yjobs()
+bot.save()
