@@ -14,13 +14,6 @@
         "type": "Global"
     },
     {
-        "title": "Accessibility Engineer",
-        "company": "Quantrics Enterprises Inc.",
-        "url": "https://ph.linkedin.com/jobs/view/accessibility-engineer-at-quantrics-enterprises-inc-4374592647",
-        "source": "LinkedIn",
-        "type": "Global"
-    },
-    {
         "title": "Accessibility Specialist",
         "company": "Engineering International Belgium",
         "url": "https://lu.linkedin.com/jobs/view/accessibility-specialist-at-engineering-international-belgium-4373477601",
@@ -28,30 +21,9 @@
         "type": "Global"
     },
     {
-        "title": "Assessment Accessibility Specialist",
-        "company": "Curriculum Associates",
-        "url": "https://in.linkedin.com/jobs/view/assessment-accessibility-specialist-at-curriculum-associates-4372424020",
-        "source": "LinkedIn",
-        "type": "Global"
-    },
-    {
-        "title": "Campus Director of Disability and Accessibility Services",
-        "company": "Connecticut State Community College",
-        "url": "https://www.linkedin.com/jobs/view/campus-director-of-disability-and-accessibility-services-at-connecticut-state-community-college-4375658140",
-        "source": "LinkedIn",
-        "type": "Global"
-    },
-    {
         "title": "Web Accessibility Intern",
         "company": "State of Iowa - Executive Branch",
         "url": "https://www.linkedin.com/jobs/view/web-accessibility-intern-at-state-of-iowa-executive-branch-4373496133",
-        "source": "LinkedIn",
-        "type": "Global"
-    },
-    {
-        "title": "Disability Access Offier (DAO)",
-        "company": "Sunderland AFC",
-        "url": "https://uk.linkedin.com/jobs/view/disability-access-offier-dao-at-sunderland-afc-4374294135",
         "source": "LinkedIn",
         "type": "Global"
     },
@@ -66,6 +38,34 @@
         "title": "Accessibility Officer",
         "company": "Executive Edge Recruitment",
         "url": "https://ie.linkedin.com/jobs/view/accessibility-officer-at-executive-edge-recruitment-4375136818",
+        "source": "LinkedIn",
+        "type": "Global"
+    },
+    {
+        "title": "Disability Access Offier (DAO)",
+        "company": "Sunderland AFC",
+        "url": "https://uk.linkedin.com/jobs/view/disability-access-offier-dao-at-sunderland-afc-4374294135",
+        "source": "LinkedIn",
+        "type": "Global"
+    },
+    {
+        "title": "Digital Accessibility Specialist",
+        "company": "George Mason University",
+        "url": "https://www.linkedin.com/jobs/view/digital-accessibility-specialist-at-george-mason-university-4375891183",
+        "source": "LinkedIn",
+        "type": "Global"
+    },
+    {
+        "title": "Campus Director of Disability and Accessibility Services",
+        "company": "Connecticut State Community College",
+        "url": "https://www.linkedin.com/jobs/view/campus-director-of-disability-and-accessibility-services-at-connecticut-state-community-college-4375658140",
+        "source": "LinkedIn",
+        "type": "Global"
+    },
+    {
+        "title": "Accessibility Assistant",
+        "company": "Ascot Racecourse",
+        "url": "https://uk.linkedin.com/jobs/view/accessibility-assistant-at-ascot-racecourse-4377411344",
         "source": "LinkedIn",
         "type": "Global"
     }
